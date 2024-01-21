@@ -23,6 +23,23 @@ Navigate to the project root directory:
 cd jupyter-docker-compose
 ```
 
+### Traefik and Authelia integrations
+For my use case, I have integrated traefik reverse proxy and authelia authentication services within my docker server setup.
+For that purpose I have modified my docker-compose accordingly. Use the original fork for fresh setup without dependencies.
+
+
+### Extend python packages
+We need to address is the Python modules required to run the code in a notebook. We can solve this by creating a requirements.txt file, where all the dependencies are specified. Here is an example file:
+
+```
+numpy==1.24.2
+pandas==2.0.0
+matplotlib==3.7.1
+yfinance==0.2.36
+```
+This requirements file cold be extended as required.
+
+
 Build the the image for the Jupyter Notebook server:
 
 ```bash
