@@ -6,7 +6,17 @@ services:
       dockerfile: ./docker/jupyter/Dockerfile
     volumes:
       - ./work:/home/abhishek0010/work
-    ports:
-      - 8888:8888
     container_name: jupyter_notebook
     command: "start-notebook.sh --NotebookApp.token="
+    networks:
+      - reverse_proxy_nw
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.redis.rule=Host(`jupyter.abhishek0010.in`)"
+      - "traefik.http.routers.redis.tls=true"
+      #- "traefik.tcp.routers.redis.entrypoints=redis"
+      - "traefik.http.services.redis.loadbalancer.server.port=8888"
+      #- "traefik.tcp.routers.redis.service=redis"
+networks:
+  reverse_proxy_nw:
+    external: true
