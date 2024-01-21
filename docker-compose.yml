@@ -12,10 +12,11 @@ services:
       - reverse_proxy_nw
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.redis.rule=Host(`jupyter.abhishek0010.in`)"
-      - "traefik.http.routers.redis.tls=true"
+      - "traefik.http.routers.jupyter.rule=Host(`jupyter.abhishek0010.in`)"
+      - "traefik.http.routers.jupyter.tls=true"
       #- "traefik.tcp.routers.redis.entrypoints=redis"
-      - "traefik.http.services.redis.loadbalancer.server.port=8888"
+      - "traefik.http.services.jupyter.loadbalancer.server.port=8888"
+      - "traefik.http.routers.jupyter.middlewares=authelia@docker"
       #- "traefik.tcp.routers.redis.service=redis"
 networks:
   reverse_proxy_nw:
